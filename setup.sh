@@ -6,6 +6,3 @@ if [ "$1" == "build" ]; then
 fi
 cd ../backend
 yarn
-if [ "$1" != "build" ]; then
-	cp .env.example .env
-fi

@@ -1,0 +1,47 @@
+version: '3'
+services:
+   # mongo:
+   #    container_name: mongo
+   #    image: mongo:latest
+   #    ports:
+   #       - '27018:27017'
+   #    volumes:
+   #       - ./data:/data/db
+   redis:
+      image: redis:latest
+      container_name: redis
+      ports:
+         - 6379
+   backend:
+      container_name: backend
+      build:
+         context: ./backend/
+      command: yarn dev
+      volumes:
+         - ./backend/:/usr/app
+         - /usr/app/node_modules
+      depends_on:
+         - redis
+         # - mongo
+      ports:
+         - '5000:5000'
+         - '9222:9222'
+      network_mode: host
+      # env_file: ./backend/.env # TODO - uncomment this to auto-load your .env file!
+      environment:
+         - NODE_ENV=development
+         - DB=mongodb://localhost:27017/PH
+         - REDIS_URL=redis://redis
+   frontend:
+      container_name: frontend
+      build:
+         context: ./frontend/
+      command: npm start
+      volumes:
+         - ./frontend/:/usr/app
+         - /usr/app/node_modules
+      depends_on:
+         - backend
+      ports:
+         - '3000:3000'
+      network_mode: host
