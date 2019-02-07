@@ -1,6 +1,8 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/PurdueHackers/PH-Website-Frontend.git
+	branch = master
 [submodule "backend"]
 	path = backend
 	url = https://github.com/PurdueHackers/PH-Website-Backend.git
+	branch = master
