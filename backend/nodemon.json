@@ -1,0 +1,20 @@
+{
+	"debug": true,
+
+	"signal": "SIGTERM",
+	"exec": "ts-node src/index.ts",
+	"ignore": [
+		"mochawesome-report",
+		"node_modules",
+		".git",
+		"./test",
+		"**/*.d.ts",
+		"*.test.ts",
+		"*.spec.ts",
+		"fixtures/*",
+		"test/**/*",
+		"docs/*"
+	],
+	"watch": ["./src"],
+	"ext": "ts"
+}

@@ -1,0 +1,51 @@
+{
+	"root": true,
+	"parser": "babel-eslint",
+	"extends": ["airbnb", "prettier", "prettier/react"],
+	"plugins": ["import", "prettier", "react", "unicorn"],
+	"rules": {
+		"indent": "off",
+		"no-tabs": "off",
+		"react/jsx-indent": ["error", "tab"],
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [".js", ".jsx"]
+			}
+		],
+		"react/jsx-indent-props": 0,
+		"react/no-unescaped-entities": "off",
+		"react/forbid-prop-types": "off",
+		"react/no-array-index-key": "off",
+		"no-underscore-dangle": "off",
+		"import/prefer-default-export": "off",
+		"no-console": "off",
+		"function-paren-newline": "off",
+		"jsx-a11y/anchor-is-valid": 0,
+		"react/prefer-stateless-function": 0,
+		"arrow-parens": "off",
+		"curly": "off",
+		"object-curly-newline": "off",
+		"no-confusing-arrow": "off",
+		"no-return-assign": "off",
+		"no-param-reassign": "off",
+		"no-unused-expressions": "off",
+		"no-nested-ternary": "off",
+		"import/first": 0,
+		"no-mixed-spaces-and-tabs": "error",
+		"newline-per-chained-call": "error",
+		"prettier/prettier": [
+			"error",
+			{
+				"singleQuote": true,
+				"printWidth": 100,
+				"tabWidth": 3,
+				"useTabs": true
+			}
+		],
+		"comma-dangle": "off"
+	},
+	"env": {
+		"browser": true
+	}
+}
