@@ -15,7 +15,7 @@ http://www.purduehackers.com/
 
 ### Cloning the repo
 
--  `git clone REPO_URL --recursive` \* Replace "REPO_URL" with the url of this git repo
+-  `git clone https://github.com/PurdueHackers/PH-Website --recursive`
 
 ### Setup
 
