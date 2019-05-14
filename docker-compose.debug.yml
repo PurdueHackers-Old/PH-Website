@@ -1,11 +1,5 @@
 version: "3"
 services:
-    redis:
-      image: redis:latest
-      container_name: redis
-      ports:
-         - 6379
-         
     mongo:
         container_name: mongo
         image: mongo
@@ -32,10 +26,10 @@ services:
             driver: none
         entrypoint: ./wait.sh mongo:27017 -- node app
 
-    app:
+    app-debug:
         tty: true
         stdin_open: true
-        container_name: app
+        container_name: app-debug
         build:
             context: ./
         volumes:
@@ -50,5 +44,4 @@ services:
         restart: on-failure
         environment:
             - DB=mongodb://mongo/mydb
-            - REDIS_URL=redis://redis
-        entrypoint: wait-for-it mongo:27017 -- yarn dev
+        entrypoint: wait-for-it mongo:27017 -- yarn dev:debug

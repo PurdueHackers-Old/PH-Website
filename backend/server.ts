@@ -12,6 +12,7 @@ import { useExpressServer, useContainer } from 'routing-controllers';
 import { Container } from 'typedi';
 import { Queue } from 'bull';
 import { Logger } from 'winston';
+import * as next from 'next';
 import CONFIG from './config';
 import passportMiddleWare, { extractUser } from './middleware/passport';
 import { globalError } from './middleware/globalError';
@@ -31,6 +32,7 @@ export default class Server {
 	public app: express.Application;
 	public mongoose: typeof mongoose;
 	public logger: Logger;
+	public nextApp: next.Server;
 	public queues: {
 		[x: string]: Queue<any>;
 	};
@@ -40,6 +42,19 @@ export default class Server {
 		this.logger = createLogger(this);
 		this.queues = {};
 		this.setup();
+	}
+
+	public async initFrontend() {
+		try {
+			await this.nextApp.prepare();
+			const handle = this.nextApp.getRequestHandler();
+			this.app.get('*', (req, res) => {
+				return handle(req, res);
+			});
+		} catch (error) {
+			this.logger.error('Error setting up frontend:', error);
+			throw error;
+		}
 	}
 
 	public async startJobs() {
@@ -112,10 +127,11 @@ export default class Server {
 
 	private async setupMongo() {
 		try {
-			this.mongoose = await mongoose.connect(
-				DB,
-				{ useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }
-			);
+			this.mongoose = await mongoose.connect(DB, {
+				useNewUrlParser: true,
+				useCreateIndex: true,
+				useFindAndModify: false
+			});
 			this.mongoose.Promise = Promise;
 			return this.mongoose;
 		} catch (error) {

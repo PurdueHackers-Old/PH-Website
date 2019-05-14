@@ -59,15 +59,18 @@ dist/
 
 # dotenv environment variables file
 .env
+.env.*
 
 # MongoDB Dumps
 dump/
 phdump/
+data/
 
 .DS_Store
 
-# Google Cloud
-purduehackers.json
 # app.yaml
+
+# Next JS
+.next/
 
 .DS_Store
