@@ -1,0 +1,40 @@
+require('dotenv').config();
+
+const env = process.env;
+
+const sharedConfig = {
+	NODE_ENV: env.NODE_ENV || 'development',
+	PORT: env.PORT || 5000,
+	TRACKING_ID: env.TRACKING_ID || 'my-tracking-id'
+};
+
+const serverRuntimeConfig = {
+	DB: env.DB || 'mongodb://localhost:27017/PH',
+	REDIS_URL: env.REDIS_URL || 'redis://localhost:6379',
+	SECRET: env.SECRET || 'my-secret',
+	EXPIRES_IN: env.EXPIRES_IN || 10000,
+	NODE_ENV: env.NODE_ENV || 'development',
+	CREDENTIAL_SECRET: env.CREDENTIAL_SECRET || 'CredentialSecret',
+	ORG_NAME: env.ORG_NAME || 'Purdue Hackers',
+	EMAIL: env.EMAIL || 'my@email.com',
+	GC_BUCKET: env.GC_BUCKET || 'mybucket',
+	GC_PROJECT_ID: env.GC_PROJECT_ID || 'myprojectid',
+	GC_PRIVATE_KEY: env.GC_PRIVATE_KEY || 'myprivatekey',
+	GC_CLIENT_EMAIL: env.GC_CLIENT_EMAIL || 'my@clientemail.com',
+	SENDGRID_KEY: env.SENDGRID_KEY || 'mysendgridkey',
+	FACEBOOK_ACCESS_TOKEN: env.FACEBOOK_ACCESS_TOKEN || 'myfbtoken',
+	...sharedConfig
+};
+
+const publicRuntimeConfig = {
+	...sharedConfig,
+	API_URL:
+		sharedConfig.NODE_ENV === 'production'
+			? 'https://purduehackers.herokuapp.com'
+			: `http://localhost:${sharedConfig.PORT}/api`
+};
+
+module.exports = {
+	publicRuntimeConfig,
+	serverRuntimeConfig
+};
