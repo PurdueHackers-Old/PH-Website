@@ -2,13 +2,7 @@ import cookie from 'js-cookie';
 import Router from 'next/router';
 import { IUser, IContext } from '../@types';
 import { sendErrorMessage } from '../redux/actions';
-
-export enum Role {
-	USER = 'USER',
-	MENTOR = 'MENTOR',
-	EXEC = 'EXEC',
-	ADMIN = 'ADMIN'
-}
+import { Role } from '../../shared/user.enums';
 
 export const setCookie = (key: string, value: string | object, ctx?: IContext, options?) => {
 	// Server

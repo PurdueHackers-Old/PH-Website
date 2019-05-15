@@ -41,6 +41,7 @@ export interface ICreateUser {
 export interface ILoginUser {
 	email: string;
 	password: string;
+	rememberMe: boolean;
 }
 
 // Response types
